@@ -1,0 +1,74 @@
+//colors of the page
+@import "colors";
+
+%stepper_classes {
+
+  position: relative;
+  overflow: hidden;
+
+  height: 20px;
+  width: 42px;
+
+  input {
+    @include box-sizing(border-box);
+
+    height: 20px;
+    width: 42px;
+  }
+
+  span.up,
+  span.down {
+    @include stretch(0, false, false, 26px);
+
+    display: inline-block;
+    height: 10px;
+    width: 16px;
+
+    background: -moz-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
+    background: -webkit-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
+    background: -o-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
+    background: -ms-linear-gradient(top, $green 0% ,$japanese_laurel 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$japanese_laurel', endColorstr='$japanese_laurel',GradientType=0 ); 
+    background: linear-gradient(top, $green 0% ,$japanese_laurel 100%);
+
+    cursor: pointer;
+
+    text-indent: 99999px;
+
+    &:hover {
+      background: none;
+      background-color: $green;
+
+    }
+  } 
+
+  span:after {
+    @include stretch(-3px, false, false, 3px);
+
+    content: ''; 
+
+    border: 5px solid transparent;
+    border-bottom: 6px solid white;
+  } 
+
+  span.down {
+    @include stretch(10px, false, false, false);
+
+    background-image: -moz-linear-gradient(top, $japanese_laurel 0%, $green 100%); 
+    background-image: -webkit-linear-gradient(top, $japanese_laurel 0%, $green 100%); 
+    background-image: -o-linear-gradient(top, $japanese_laurel 0%, $green 100%); 
+    background-image: -ms-linear-gradient(top, $japanese_laurel 0% ,$green 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$japanese_laurel', endColorstr='$japanese_laurel',GradientType=0 ); 
+    background-image: linear-gradient(top, $japanese_laurel 0% ,$green 100%);
+
+    &:after {
+      @include stretch(2px, false, false, 3px);
+
+      content: ''; 
+
+      border: 5px solid transparent;
+      border-top: 6px solid white;
+    }
+  }      
+
+}

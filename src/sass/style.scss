@@ -1,0 +1,24 @@
+
+@import "lib/compass/css3";
+@import "lib/compass/layout";
+// @import "lib/compass/reset";
+// @import "lib/compass/reset-legacy";
+// @import "lib/compass/support";
+// @import "lib/compass/typography";
+// @import "lib/compass/utilities";
+
+//classes
+@import "classes";
+//common and main styles for all pages
+@import "main";
+
+//colors of the page
+@import "colors";
+
+//style for main block and all inserted elements
+@import "style_main_block"; 
+
+//style for right block with basket satus
+@import "right_block_basket";
+
+

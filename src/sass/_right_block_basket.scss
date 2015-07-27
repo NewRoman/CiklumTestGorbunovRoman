@@ -1,0 +1,85 @@
+.cart-status {
+  background-color: $milan;
+  box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.35);
+
+  .cart-title {
+    position: relative;
+
+    padding: 31px 23px;
+    
+    border-bottom: 2px $ronchi solid;
+    background: url("/src/images/basket-title.png") 85% center no-repeat;
+
+    p {
+      margin: 0;
+
+      font-size: 14px;
+    }
+
+    span {
+      @include stretch(0px, 14%, false, false);
+
+      display: block;
+      height: 20px;
+      width: 30px;
+
+      background: url("/src/images/basket-count.png") center center no-repeat;
+
+      color: $white;
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.8;
+
+    }
+
+
+  }
+
+  table {
+    width: 100%;
+    
+    border-collapse: collapse;
+
+    tr {
+      border-bottom: 2px $ronchi solid;
+
+      &:last-child {
+        border-bottom: none;        
+      }
+    }
+
+    td {
+      padding-top: 16px;
+      padding-bottom: 16px;
+      padding-right: 10px;
+
+      vertical-align: top;
+
+      p {
+        margin: 0;
+
+        font-size: 11px;
+        color: $abbey;
+      }
+
+      //styles for plugin stepper
+      div.stepper {
+        @extend %stepper_classes;   
+      }
+
+      &.basket-title {
+        padding: 16px 0 16px 16px;
+        width: 50%;
+      }
+
+      &.basket-price {
+        text-align: right;
+        width: 25%;
+      }
+
+      &.result-price {
+        text-align: right;
+      }
+    }
+  }
+}
