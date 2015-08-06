@@ -111,7 +111,24 @@
       }         
     }
 
+    .wrap-gallery {
+      text-align: center;
+    }
+
     .img-gallery {
+      margin: 0;
+      padding: 0;
+
+      list-style-type: none;
+
+      li {
+        display: inline-block;
+        width: 50px;
+
+        img {
+          max-width: 100%;
+        }
+      }
       height: 55px;
     }
 

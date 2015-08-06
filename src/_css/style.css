@@ -182,8 +182,18 @@ aside {
         left: 0;
         right: 0;
         margin: auto; }
+    .list-tile .product-item .wrap-gallery {
+      text-align: center; }
     .list-tile .product-item .img-gallery {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
       height: 55px; }
+      .list-tile .product-item .img-gallery li {
+        display: inline-block;
+        width: 50px; }
+        .list-tile .product-item .img-gallery li img {
+          max-width: 100%; }
     .list-tile .product-item h4.title {
       height: 38px;
       margin: 0 5%;

@@ -165,6 +165,8 @@ $(document).ready(function(){
   function showAllProducts() {
     $.getJSON("/data/products.json", function(data) {
       generatingProdItem(data);
+
+      makeImagesGallery(data);        
     });
   }
 
@@ -176,6 +178,143 @@ $(document).ready(function(){
     //show first foto of product
     showSingleImage();
     $('[type="number"]').stepper();
+  }
+ 
+
+  //show first foto of product
+  function showSingleImage() {
+    $.getJSON("/data/galleries.json", function(data) {
+      arr_galleries = data.galleries;
+      $images=$('[data-gallery-id]');
+      for (var i = 0; i<arr_galleries.length; i++) {
+        $images.each(function(indx, element){
+          $element = $(element);
+          if ($element.attr('data-gallery-id') == arr_galleries[i].id) {
+            $element.attr('src', 'images/'+arr_galleries[i].id+'/'+arr_galleries[i].images[0]);
+          }          
+        });
+      }        
+    });    
+  } 
+
+  //insert all images of product
+  function makeImagesGallery(data) {
+    var data_prod = data.products;
+
+    $.getJSON("/data/galleries.json", function(data_gall_obj) {
+      var arr_img = [];
+      var gallery_id;
+      var data_gall = data_gall_obj.galleries;
+      
+      for(var i=0; i<data_prod.length; i++) {
+        console.log(data);
+        for(var j=0; j<data_gall.length;j++) {
+          if (data_gall[j].id == data_prod[i].gallery_id) {
+            arr_img = data_gall[j].images;
+            gallery_id = data_gall[j].id;            
+          }
+        }
+        
+        $gallery_images = $('[data-gallery-id-all='+gallery_id+']');
+        for(var k=0; k<arr_img.length; k++) {
+          $('<li><img src="images/'+gallery_id+'/'+arr_img[k]+'"></li>').appendTo($gallery_images);
+        }
+      }
+    });
+  }
+      
+  
+  function showProductsEachCategory(category_id) {
+    
+    $.getJSON("/data/products.json", function(data) {
+      
+      var data_products = {"products":[]};//object with array of suitable products
+      var arr_products = data.products;
+      var counter = 0; 
+      data_products.products.length == 0;
+      for (var i = 0; i < arr_products.length; i++) {
+        //make object with array of suitable products, need for handlebars.js
+        if (category_id == arr_products[i].category_id) {
+          data_products.products[counter]=arr_products[i];
+          counter++;
+        }       
+      }
+      generatingProdItem(data_products);
+      makeImagesGallery(data); 
+    });
+  } 
+
+  function sortAllProductsWithoutCategory(sorted_mode) {
+    $.getJSON("/data/products.json", function(data) {
+       switch (sorted_mode) {
+        case 1:
+          data.products.sort(function(obj1, obj2) {
+            //sort array by ascending price
+            return obj1.price-obj2.price;
+          });
+
+          generatingProdItem(data);
+          makeImagesGallery(data); 
+          break;
+        case 2:
+          data.products.sort(function(obj1, obj2) {
+            //sort array by ascending price
+            return obj2.price-obj1.price;
+          });
+
+          generatingProdItem(data);
+          makeImagesGallery(data); 
+          break;
+        default:
+          alert( 'Unknown sorted type');
+      }  
+
+
+    });
+  }
+
+  function sortProductsEachCategory(category_id, sorted_mode) {
+    $.getJSON("/data/products.json", function(data) {
+      
+      var data_products = {"products":[]};//object with array of suitable products
+      var arr_products = data.products;
+      var counter = 0; 
+      data_products.products.length == 0;
+      for (var i = 0; i < arr_products.length; i++) {
+        //make object with array of suitable products, need for handlebars.js
+        if (category_id == arr_products[i].category_id) {
+          data_products.products[counter]=arr_products[i];
+          counter++;
+        }       
+      }
+
+      switch (sorted_mode) {
+        case 0:
+          generatingProdItem(data_products);
+          makeImagesGallery(data_products); 
+          break;
+        case 1:
+          data_products.products.sort(function(obj1, obj2) {
+            //sort array by ascending price
+            return obj1.price-obj2.price;
+          });
+
+          generatingProdItem(data_products);
+          makeImagesGallery(data_products); 
+          break;
+        case 2:
+          data_products.products.sort(function(obj1, obj2) {
+            //sort array by ascending price
+            return obj2.price-obj1.price;
+          });
+
+          generatingProdItem(data_products);
+          makeImagesGallery(data_products); 
+          break;
+        default:
+          alert( 'Unknown sorted type');
+      }
+    });
   }
 
   //generate basket products cell
@@ -201,107 +340,5 @@ $(document).ready(function(){
     basket_obj.total_basket_count = parseInt(total_count);
     basket_obj.total_basket_price = Math.ceil(total_price); 
 
-  }
-
-  //show first foto of product
-  function showSingleImage() {
-    $.getJSON("/data/galleries.json", function(data) {
-      arr_galleries = data.galleries;
-      $images=$('[data-gallery-id]');
-      for (var i = 0; i<arr_galleries.length; i++) {
-        $images.each(function(indx, element){
-          $element = $(element);
-          if ($element.attr('data-gallery-id') == arr_galleries[i].id) {
-            $element.attr('src', 'images/'+arr_galleries[i].id+'/'+arr_galleries[i].images[0]);
-          }          
-        });
-      }        
-    });    
-  } 
-  
-  function showProductsEachCategory(category_id) {
-    
-    $.getJSON("/data/products.json", function(data) {
-      
-      var data_products = {"products":[]};//object with array of suitable products
-      var arr_products = data.products;
-      var counter = 0; 
-      data_products.products.length == 0;
-      for (var i = 0; i < arr_products.length; i++) {
-        //make object with array of suitable products, need for handlebars.js
-        if (category_id == arr_products[i].category_id) {
-          data_products.products[counter]=arr_products[i];
-          counter++;
-        }       
-      }
-      generatingProdItem(data_products);
-    });
-  } 
-
-  function sortAllProductsWithoutCategory(sorted_mode) {
-    $.getJSON("/data/products.json", function(data) {
-       switch (sorted_mode) {
-        case 1:
-          data.products.sort(function(obj1, obj2) {
-            //sort array by ascending price
-            return obj1.price-obj2.price;
-          });
-
-          generatingProdItem(data);
-          break;
-        case 2:
-          data.products.sort(function(obj1, obj2) {
-            //sort array by ascending price
-            return obj2.price-obj1.price;
-          });
-
-          generatingProdItem(data);
-          break;
-        default:
-          alert( 'Unknown sorted type');
-      }     
-
-    });
-  }
-
-  function sortProductsEachCategory(category_id, sorted_mode) {
-    $.getJSON("/data/products.json", function(data) {
-      
-      var data_products = {"products":[]};//object with array of suitable products
-      var arr_products = data.products;
-      var counter = 0; 
-      data_products.products.length == 0;
-      for (var i = 0; i < arr_products.length; i++) {
-        //make object with array of suitable products, need for handlebars.js
-        if (category_id == arr_products[i].category_id) {
-          data_products.products[counter]=arr_products[i];
-          counter++;
-        }       
-      }
-
-      switch (sorted_mode) {
-        case 0:
-          generatingProdItem(data_products);
-          break;
-        case 1:
-          data_products.products.sort(function(obj1, obj2) {
-            //sort array by ascending price
-            return obj1.price-obj2.price;
-          });
-
-          generatingProdItem(data_products);
-          break;
-        case 2:
-          data_products.products.sort(function(obj1, obj2) {
-            //sort array by ascending price
-            return obj2.price-obj1.price;
-          });
-
-          generatingProdItem(data_products);
-          break;
-        default:
-          alert( 'Unknown sorted type');
-      }
-    });
   }
 });
