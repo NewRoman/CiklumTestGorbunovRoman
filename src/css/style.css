@@ -236,28 +236,33 @@ aside {
         text-decoration: none;
         font-weight: bold;
         color: white;
-        background-color: #08ee00;
-        background-image: -webkit-linear-gradient(top, #08ee00 0%, #069b01 100%);
-        background-image: -ms-linear-gradient(top, #08ee00 0%, #069b01 100%);
+        background: #08ee00;
+        background: -webkit-linear-gradient(top, #08ee00 0%, #069b01 100%);
+        background: -ms-linear-gradient(top, #08ee00 0%, #069b01 100%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$japanese_laurel', endColorstr='$japanese_laurel',GradientType=0 );
-        background-image: linear-gradient(top, #08ee00 0%, #069b01 100%); }
+        background: linear-gradient(top, #08ee00 0%, #069b01 100%); }
         .list-tile .product-item .in-cart-block .prod-price:hover, .list-tile .product-item .in-cart-block .cart-ico:hover {
-          background-image: none;
-          background-color: #08ee00; }
+          background: none;
+          background: #08ee00; }
         .list-tile .product-item .in-cart-block .prod-price.disable, .list-tile .product-item .in-cart-block .cart-ico.disable {
           pointer-events: none;
           background-image: none;
           background-color: gray;
           cursor: none; }
       .list-tile .product-item .in-cart-block .cart-ico {
-        border-radius: 0px 5px 5px 0px;
+        height: 19px;
         margin-left: 2px;
-        padding: 6px 10px; }
-        .list-tile .product-item .in-cart-block .cart-ico .cart-icon-bg {
-          display: inline-block;
-          height: 16px;
-          width: 20px;
-          background-image: url("/src/images/basket.png"); }
+        padding: 6px 10px;
+        width: 20px;
+        border-radius: 0px 5px 5px 0px;
+        background: #08ee00;
+        background: url("/src/images/basket.png") no-repeat center center, -webkit-linear-gradient(top, #08ee00 0%, #069b01 100%);
+        background: url("/src/images/basket.png") no-repeat center center, -ms-linear-gradient(top, #08ee00 0%, #069b01 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$japanese_laurel', endColorstr='$japanese_laurel',GradientType=0 );
+        background: url("/src/images/basket.png") no-repeat center center, linear-gradient(top, #08ee00 0%, #069b01 100%); }
+        .list-tile .product-item .in-cart-block .cart-ico:hover {
+          background: none;
+          background: url("/src/images/basket.png") no-repeat center center, #08ee00; }
     .list-tile .product-item:hover {
       position: relative;
       z-index: 5;
@@ -327,3 +332,15 @@ aside {
         width: 25%; }
       .cart-status table td.result-price {
         text-align: right; }
+
+.clear-basket {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 15px;
+  width: 50%;
+  background-color: #e6d43e;
+  border-radius: 5px;
+  box-shadow: 1px 3px 5px 0px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  color: white;
+  text-align: center; }

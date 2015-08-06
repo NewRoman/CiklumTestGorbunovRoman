@@ -12,69 +12,23 @@
   <body>
     <div id="main_wrapper">
       <!-- start block with cart status -->
-      <aside>
+      <aside role="basket-display">
+      
         <div class="cart-status" id='handlebars-basket-container'>
+
           <div class="cart-title">
             <p>Shopping basket</p>
-            <span>2</span>
+            <span>0</span>
           </div>
-
-          <table>
-            <tr>
-              <td class="basket-title">
-                <p>title kdjfkjd kfjgkj fkjgkfjg fkjgkf</p>
-              </td>
-              <td>
-                <input type="number">
-              </td>
-              <td class="basket-price">
-                <p>
-                  price
-                </p>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="basket-title">
-                <p>title kdjfkjd kfjgkj fkjgkfjg fkjgkf</p>
-              </td>
-              <td>
-                <input type="number">
-              </td>
-              <td class="basket-price">
-                <p>
-                  price
-                </p>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="basket-title">
-                <p>title  fkjgkf</p>
-              </td>
-              <td>
-                <input type="number">
-              </td>
-              <td class="basket-price">
-                <p>
-                  price
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td class="result-price" colspan='3'>
-                <p>$ 999</p>
-              </td> 
-            </tr>
-           </table>
+         
         </div>
+
+        <span class="clear-basket" role="clear-basket">Clear basket</span>
       </aside>
       <!-- end block with cart status -->
 
       <!-- start block with categories menu and product list -->
       <main>
-
-
         <!-- start category menu -->
         <!-- template wich show list of categories -->
         <script id="handlebars-categories-template" type="text/x-handlebars-template">
@@ -129,7 +83,7 @@
     <script id="handlebars-list-template" type="text/x-handlebars-template">
       <section class="list-tile" id="handlebars-list-container">
         {{#each products}}
-          <div class="product-item">
+          <div class="product-item" data-product-item>
             <div class="prod-img">
               <img data-gallery-id={{gallery_id}} src="" alt=""/>
             </div>
@@ -139,21 +93,22 @@
                 
               </div>
 
-              <h4 class="title"><a href="#">{{title}}</a></h4>
+              <h4 class="title"><a href="#" data-title>{{title}}</a></h4>
               <div class="prod-descr">
                 <p>{{description}}</p>
               </div>
               <div class="in-cart-block">
-                <input type="number" value={{quantity}}>
+                <input type="number" data-quantity-item value={{quantity}}>
+                <input type="hidden" data-item-id value={{id}}>
                 {{#ifCond quantity '===' 0}}
                   <a href=""  class="cart-ico disable" ><i class="cart-icon-bg"></i></a>
-                  <a href="" class="prod-price disable" >$ {{price}}</a>
+                  <a href="" class="prod-price disable" >$ <span>{{price}}</span></a>
                  
                 {{/ifCond}}
 
                 {{#ifCond quantity '>' 0}}
-                  <a href=""  class="cart-ico"><i class="cart-icon-bg"></i></a>
-                  <a href="" class="prod-price">$ {{price}}</a>
+                  <a class="cart-ico" role="add-to-basket"></a>
+                  <a href="" class="prod-price">$ <span data-price-item>{{price}}</span></a>
                 {{/ifCond}}
 
                 <div class="clear"></div>
@@ -171,17 +126,17 @@
       <div class="cart-status" id='handlebars-basket-container'>
         <div class="cart-title">
           <p>Shopping basket</p>
-          <span>{{basket_count}}</span>
+          <span>{{total_basket_count}}</span>
         </div>
 
         <table>
-          {{#each items}}
+          {{#each basket_products}}
             <tr>
               <td class="basket-title">
                 <p>{{title}}</p>
               </td>
               <td>
-                <input type="number" value="{{item_count}}">
+                <input data-id-item="{{id}}" role="change-quantity" type="number" value="{{quantity}}">
               </td>
               <td class="basket-price">
                 <p>
@@ -193,7 +148,7 @@
 
           <tr>
             <td class="result-price">
-              <p>$ 999</p>
+              <p>$ {{total_basket_price}}</p>
             </td> 
           </tr>
          </table>

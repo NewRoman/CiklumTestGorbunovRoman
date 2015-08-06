@@ -195,17 +195,17 @@
         font-weight:bold; 
         color: $white; 
         
-        background-color:$green; 
-        background-image: -moz-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
-        background-image: -webkit-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
-        background-image: -o-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
-        background-image: -ms-linear-gradient(top, $green 0% ,$japanese_laurel 100%); 
+        background:$green; 
+        background: -moz-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
+        background: -webkit-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
+        background: -o-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
+        background: -ms-linear-gradient(top, $green 0% ,$japanese_laurel 100%); 
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$japanese_laurel', endColorstr='$japanese_laurel',GradientType=0 ); 
-        background-image: linear-gradient(top, $green 0% ,$japanese_laurel 100%);
+        background: linear-gradient(top, $green 0% ,$japanese_laurel 100%);
         
          &:hover {
-           background-image: none;
-           background-color:$green;  
+           background: none;
+           background: $green;  
         }
 
         &.disable {
@@ -219,16 +219,24 @@
       }
 
       .cart-ico {
-        border-radius: 0px 5px 5px 0px; 
+        height: 19px;
         margin-left: 2px;
         padding: 6px 10px;
+        width: 20px;
 
-        .cart-icon-bg {
-          display: inline-block;
-          height: 16px;
-          width: 20px;
+        border-radius: 0px 5px 5px 0px; 
 
-          background-image: url("/src/images/basket.png");
+        background:$green; 
+        background: url("/src/images/basket.png") no-repeat center center, -moz-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
+        background: url("/src/images/basket.png") no-repeat center center, -webkit-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
+        background: url("/src/images/basket.png") no-repeat center center, -o-linear-gradient(top, $green 0%, $japanese_laurel 100%); 
+        background: url("/src/images/basket.png") no-repeat center center, -ms-linear-gradient(top, $green 0% ,$japanese_laurel 100%); 
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$japanese_laurel', endColorstr='$japanese_laurel',GradientType=0 ); 
+        background: url("/src/images/basket.png") no-repeat center center, linear-gradient(top, $green 0% ,$japanese_laurel 100%);
+        
+        &:hover {
+          background: none;
+          background: url("/src/images/basket.png") no-repeat center center, $green;  
         }
       }
     }
